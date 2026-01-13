@@ -1,81 +1,70 @@
+import service.vetorService;
+import model.Vetor;
 import java.util.Scanner;
 
-public class Main {
+
+public class main {
     public static void main(String[] args) {
-        Scanner t = new Scanner(System.in);
-        Vetor vetor = new Vetor(10);
+        Scanner sc = new Scanner(System.in);
+        Vetor vetor = new Vetor();
+        vetorService service = new vetorService();
 
-        while (true) {
+        int opcao;
 
-            System.out.println("       Menu de opções");
+        do {
+            System.out.println("\n--- MENU ---");
+            System.out.println("1 - Adicionar valor");
+            System.out.println("2 - Imprimir vetor");
+            System.out.println("3 - Imprimir vetor invertido");
+            System.out.println("4 - Soma");
+            System.out.println("5 - Média");
+            System.out.println("6 - Maior valor");
+            System.out.println("7 - Menor valor");
+            System.out.println("0 - Sair");
+            System.out.print("Opção: ");
 
-            System.out.println("");
+            opcao = sc.nextInt();
 
-            System.out.println("1ª opção: coletar dados do Vetor.");
+            switch (opcao) {
+                case 1:
+                    System.out.print("Digite um valor: ");
+                    vetor.adicionarElemento(sc.nextInt());
+                    break;
 
-            System.out.println("2ª opção: randomizar os valores do Vetor.");
+                case 2:
+                    service.imprimir(vetor);
+                    break;
 
-            System.out.println("3ª opção: imprime dados do Vetor.");
+                case 3:
+                    service.imprimirInverso(vetor);
+                    break;
 
-            System.out.println("4ª opção: imprime Vetor invertido.");
+                case 4:
+                    System.out.println("Soma: " + service.somaElementos(vetor));
+                    break;
 
-            System.out.println("5ª opção: soma valores do Vetor");
+                case 5:
+                    System.out.println("Média: " + service.mediaElementos(vetor));
+                    break;
 
-            System.out.println("6ª opção: Soma personalizada dos valores do Vetor.");
+                case 6:
+                    System.out.println("Maior valor: " + service.maior(vetor));
+                    break;
 
-            System.out.println("7ª opção: Media dos valores do Vetor.");
+                case 7:
+                    System.out.println("Menor valor: " + service.menor(vetor));
+                    break;
 
-            System.out.println("8ª opção: Maior valor dentro do Vetor.");
+                case 0:
+                    System.out.println("Encerrando...");
+                    break;
 
-            System.out.println("9ª opção: Menor valor dentro do Vetor.");
-
-            System.out.println("Digite 0 para sair.");
-
-            System.out.println("");
-
-            System.out.println("Digite a opção desejada:");
-
-            int escolha = t.nextInt();
-            if (escolha == 1) {
-                vetor.coletaVetor();
-            } else if (escolha == 2) {
-                System.out.print("Digite o valor máximo para randomizar: ");
-                int max = t.nextInt();
-                vetor.gerarVetorRandomico(max);
-            } else if (escolha == 3) {
-                vetor.imprimeVetor();
-            } else if (escolha == 4) {
-                vetor.imprimeVetorInvertido();
-            } else if (escolha == 5) {
-                vetor.somaTodos();
-            } else if (escolha == 6) {
-                System.out.print("Índice de início: ");
-                int ini = t.nextInt();
-                System.out.print("Índice de término: ");
-                int fim = t.nextInt();
-                vetor.somaPersonalizada(ini, fim);
-            } else if (escolha == 7) {
-                vetor.media();
-            } else if (escolha == 8) {
-                vetor.maiorValor();
-            } else if (escolha == 9) {
-                vetor.menorValor();
+                default:
+                    System.out.println("Opção inválida.");
             }
 
-            else if (escolha == 0) {
+        } while (opcao != 0);
 
-                System.out.println("Fim do algoritimo");
-
-                break;
-
-            } else if (escolha > 9) {
-
-                System.out.println("Opção inválida");
-
-            }
-
-        }
-
+        sc.close();
     }
-
 }
